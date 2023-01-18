@@ -48,21 +48,28 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import axios from 'axios';
 
+
+
 function App() {
-  const [name, setName] = useState([]);
 
+      const [test, setTest] = useState([]);
 
-    useEffect(() => {
+      useEffect(() => {
         axios.get('http://localhost:3001/name-list')
             .then(response => {
-                setName(response.data)
+                setTest(response.data)
                 console.log(response.data);
             });
     }, []);
     return (
-      <h2>User</h2>
+      <div>
+        <h2>{test[2]?.test_body}</h2>
+         {/* {
+          test.map((item) => {
+            return (
+              <h2 key={item.test_key}>{item.test_body}</h2>
+            )})} */}
+      </div>
     );
-
-}
-
+    } 
 export default App;

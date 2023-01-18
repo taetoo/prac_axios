@@ -87,9 +87,24 @@ app.listen(PORT, () => {
 app.get("/name-list", (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     
-    const sqlQuery = "SELECT * FROM test where test_key='8'";
+    const sqlQuery = "SELECT * FROM test";
 
     db.query(sqlQuery, (err, result) => {
         res.send(result);
     });
+});
+app.post("/name", (req,res)=>{
+    req.header("Access-Control-Allow-Origin", "*");
+    const test = req.body.test;
+    // console.log(req.body);
+    connection.query("INSERT INTO test (test_body) values (?)",[test],
+    function(err,rows,fields){
+        if(err){
+            console.log("실패");
+            // console.log(err);
+        }else{
+            console.log("성공");
+            // console.log(rows);
+        };
+    });  
 });
